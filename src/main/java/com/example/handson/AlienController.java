@@ -44,7 +44,8 @@ public class AlienController {
         ModelAndView mv = new ModelAndView();
         Alien alien = repo.findById(aid).orElse(new Alien());
 
-        System.out.println(repo.findByAname("Casper"));
+        // System.out.println(repo.findByAname("Casper"));
+        System.out.println(repo.findByAidGreaterThan(200));
 
         mv.addObject(alien);
         mv.setViewName("showalien");;

@@ -22,3 +22,8 @@ It also works with other semantics,
     repo.findByAidGreaterThan(100);
 
 It only gets aids greater than 100
+
+### Writing my own queries
+
+    @Query("from Alien where aname=?1 order by aid")
+    List<Alien> findByAnameSorted(String aname);

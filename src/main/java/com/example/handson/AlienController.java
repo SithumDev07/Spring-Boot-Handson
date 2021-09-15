@@ -6,16 +6,18 @@ import com.example.handson.dao.AlienRepo;
 import com.example.handson.model.Alien;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 
-@Controller
+@RestController
 public class AlienController {
 
     @Autowired
@@ -29,29 +31,19 @@ public class AlienController {
         return mv;
     }
 
-    @RequestMapping("/searchaliens")
-    public ModelAndView viewAlien(Alien alien) {
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("obj", alien);
-        mv.setViewName("alien");        
-        return mv;
-    }
-
-    @RequestMapping("/addAlien")
-    public String addAlien(Alien alien) {
+    @PostMapping(path="/alien", consumes = {"application/json"})
+    public Alien addAlien(@RequestBody Alien alien) {
         repo.save(alien);
-        return "home";
+        return alien;
     }
 
 
-    @RequestMapping("/aliens")
-    @ResponseBody
+    @GetMapping("/aliens")
     public List<Alien> getAliens() {
         return repo.findAll();
     }
 
     @RequestMapping("/aliens/{aid}")
-    @ResponseBody
     public Optional<Alien> getAlien(@PathVariable("aid") int aid) {
         return repo.findById(aid);
     }

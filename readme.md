@@ -68,3 +68,21 @@ Clent requesting data with various data types (XMl, JSON, etc...)
 Then we have to use extra dependencies
 jackson is quiet popular for converting java objects to JSON format
 we also have jackson Dataformat XML for also accepting XML
+
+### Strict to specific data formats
+
+We also can strict to specific data formats such as only accept XML not JSON likewise. Bydefault we specifing the path as default
+
+    @RequestMapping(path="/aliens", produces = {"application/xml"})
+    @ResponseBody
+    public List<Alien> getAliens() {
+        return repo.findAll();
+    }
+
+When we are accepting raw data,
+
+    @PostMapping(path="/alien", consumes = {"application/json"})
+    public Alien addAlien(@RequestBody Alien alien) {
+        repo.save(alien);
+        return alien;
+    }

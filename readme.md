@@ -86,3 +86,22 @@ When we are accepting raw data,
         repo.save(alien);
         return alien;
     }
+
+### Deleta & PUT
+
+when deleting,
+
+    @DeleteMapping("/alien/{aid}")
+    public String deleteAlien(@PathVariable("aid") int aid) {
+        Alien a = repo.getById(aid);
+        repo.delete(a);
+        return "deleted";
+    }
+
+when updating, its behave as save or update,
+
+    @PutMapping(path="/alien", consumes = {"application/json"})
+    public Alien saveOrUpdateAlien(@RequestBody Alien alien) {
+        repo.save(alien);
+        return alien;
+    }

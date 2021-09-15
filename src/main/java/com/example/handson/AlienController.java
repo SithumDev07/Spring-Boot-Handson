@@ -1,5 +1,7 @@
 package com.example.handson;
 
+import java.util.Optional;
+
 import com.example.handson.dao.AlienRepo;
 import com.example.handson.model.Alien;
 
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 
 @Controller
@@ -42,13 +46,13 @@ public class AlienController {
 
     @RequestMapping("/aliens")
     @ResponseBody
-    public String getAliens() {
-        return repo.findAll().toString();
+    public List<Alien> getAliens() {
+        return repo.findAll();
     }
 
     @RequestMapping("/aliens/{aid}")
     @ResponseBody
-    public String getAlien(@PathVariable("aid") int aid) {
-        return repo.findById(aid).toString();
+    public Optional<Alien> getAlien(@PathVariable("aid") int aid) {
+        return repo.findById(aid);
     }
 }

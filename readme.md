@@ -48,3 +48,23 @@ When we fetch specific alien id (Parameter, we call wildcard)
     public String getAlien(@PathVarible("aid") int aid) {
         return repo.findById(aid).toString();
     }
+
+### jpaRepository
+
+it also extending CRUDRepository so we can have all the features we had previously.
+
+In previous method we used to return alien as a string, now we going to return as Optional<Alien>
+Optional do is if there are no values it will return optionals
+
+    @RequestMapping("/alien/{aid}")
+    @ResponseBody
+    public Optional<Alien> getAlien(@PathVarible("aid") int aid) {
+        return repo.findById(aid);
+    }
+
+### Content Negotiation
+
+Clent requesting data with various data types (XMl, JSON, etc...)
+Then we have to use extra dependencies
+jackson is quiet popular for converting java objects to JSON format
+we also have jackson Dataformat XML for also accepting XML

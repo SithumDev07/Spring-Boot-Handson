@@ -27,3 +27,24 @@ It only gets aids greater than 100
 
     @Query("from Alien where aname=?1 order by aid")
     List<Alien> findByAnameSorted(String aname);
+
+## REST API
+
+its usually looks www.mmon.com/aliens means get all aliens
+
+    @AutoWired
+    AlienRepo repo;
+
+    @RequestMapping("/aliens")
+    @ResponseBody
+    public String getAliens() {
+        return repo.findAll().toString();
+    }
+
+When we fetch specific alien id (Parameter, we call wildcard)
+
+    @RequestMapping("/alien/{aid}")
+    @ResponseBody
+    public String getAlien(@PathVarible("aid") int aid) {
+        return repo.findById(aid).toString();
+    }
